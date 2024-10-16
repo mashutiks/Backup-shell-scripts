@@ -1,72 +1,28 @@
-# Backup shell-scripts
 
-This repository contains a set of scripts for backing up files from a specified directory when certain conditions regarding size and percentage usage are met. The scripts are written in both Bash (`backup.sh`, `tests.sh`) and Batch (`backup.bat`, `tests.bat`) formats, making them versatile for different operating systems.
-
-## Contents
-
-- **backup.sh**: A Bash script for archiving files from a specified directory.
-- **tests.sh**: A Bash script for testing the backup functionality.
-- **backup.bat**: A Batch script for archiving files from a specified directory on Windows.
-- **tests.bat**: A Batch script for testing the backup functionality on Windows.
-
-## Installation
-
-1. Clone this repository to your local machine:
-   ```bash
-   git clone https://github.com/yourusername/backup-scripts.git
-   cd backup-scripts
-2. Make the Bash scripts executable:
-
-bash
-Копировать код
-chmod +x backup.sh tests.sh
-Ensure you have bc, tar, and dd installed for the Bash scripts. On Windows, ensure you have a compatible environment to run Batch scripts.
-
-Usage
-Backup Script (Bash)
-To run the Bash backup script, use the following command:
-
-bash
-Копировать код
-./backup.sh <path_to_folder> <max_size_in_GB> <backup_path>
-<path_to_folder>: The directory you want to back up.
-<max_size_in_GB>: The maximum allowed size of the directory in gigabytes.
-<backup_path>: The directory where backup archives will be stored.
-Example:
-bash
-Копировать код
-./backup.sh /path/to/logs 5 /path/to/backup
-Backup Script (Batch)
-To run the Batch backup script, use the following command in the Windows Command Prompt:
-
-batch
-Копировать код
-backup.bat <path_to_folder> <max_size_in_GB> <max_percent> <number_of_files_to_archive> <backup_path>
-<path_to_folder>: The directory you want to back up.
-<max_size_in_GB>: The maximum allowed size of the directory in gigabytes.
-<max_percent>: The maximum percentage of directory usage allowed before backup.
-<number_of_files_to_archive>: The number of oldest files to archive.
-<backup_path>: The directory where backup archives will be stored.
-Example:
-batch
-Копировать код
-backup.bat C:\logs 5 70 3 C:\backup
-Testing the Backup Functionality
-Bash Tests
-To run the tests for the Bash scripts, execute:
-
-bash
-Копировать код
-./tests.sh
-This will generate test files and verify the backup process.
-
-Batch Tests
-To run the tests for the Batch scripts, execute:
-
-batch
-Копировать код
-tests.bat
-Notes
-Ensure that the backup destination has enough space for the archives.
-The scripts will archive the oldest files if the directory exceeds the specified limits.
-The archived files will be compressed using gzip (for Bash) or 7-Zip (for Batch).
+Этот проект включает в себя несколько скриптов для управления архивированием файлов в заданной папке. Скрипты реализуют функциональность архивирования старых файлов, когда размер папки превышает заданный предел. 
+## Скрипты
+ 1.**`backup.sh`**: Скрипт на Bash для архивирования файлов в Unix-подобных системах.
+  2. **`tests.sh`**: Скрипт на Bash для автоматического тестирования функциональности `backup.sh`.
+  3. **`backup.bat`**: Скрипт на Batch для архивирования файлов в Windows. 
+  4. **`tests.bat`**: Скрипт на Batch для автоматического тестирования функциональности `backup.bat`. 
+## Описание
+ - **`backup.sh`**:
+   - Принимает три аргумента: 
+	 1. Путь к папке, которую нужно архивировать. 
+	  2. Максимальный размер папки в гигабайтах. 
+	  3. Путь для сохранения архивов. 
+   - Проверяет, существует ли папка и целевая директория для бэкапа. 
+   - Вычисляет текущий размер папки и, если заполненность превышает заданный порог, архивирует старые файлы.
+  - **`tests.sh`**: 
+    - Генерирует тестовые данные в папке для логов и запускает тесты для `backup.sh`, проверяя корректность архивирования. 
+   - **`backup.bat`**:
+     - Аналог `backup.sh`, но для Windows, использующий командный процессор (cmd). 
+     - Работает с 7-Zip для архивирования файлов. 
+    - **`tests.bat`**: 
+       - Автоматическое тестирование функциональности `backup.bat`. 
+   ## Использованные технологии
+   - **Bash**: Скрипты `backup.sh` и `tests.sh` написаны на языке оболочки Bash, используемом в Unix-подобных системах. 
+   - **Batch**: Скрипты `backup.bat` и `tests.bat` написаны на языке командного процессора Windows.
+    - **7-Zip**: Используется в `backup.bat` для создания архивов (необходимо установить на машину). 
+    - **`dd` и `tar`**: Инструменты командной строки для создания тестовых файлов и архивов в Unix. 
+    - **PowerShell**: Используется в `backup.bat` для работы с файлами и измерения их размера.
