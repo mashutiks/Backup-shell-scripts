@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
 # Очистка старых данных перед началом тестов
 initialize_directories() {
     local folderPath="$1"
